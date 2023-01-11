@@ -1,0 +1,17 @@
+import { TabWidget } from "std-widgets.slint";
+import { TranslateInput } from "components.slint";
+import { TranslateEdit } from "components.slint";
+App := Window {
+    title: "小猪词典";
+    TabWidget { 
+        Tab {
+            title: "词典";
+            TranslateInput {  }
+        }
+
+        Tab {
+            title: "翻译";
+            TranslateEdit {  }
+        }
+    }
+}

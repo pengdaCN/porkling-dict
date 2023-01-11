@@ -1,0 +1,39 @@
+import { ComboBox , LineEdit, Button, TextEdit} from "std-widgets.slint";
+
+export TranslateInput := Rectangle {
+    callback search(string);
+
+    private property <bool> read_only;
+    HorizontalLayout {
+        height: 42px;
+        ComboBox {
+            width: 120px;
+            enabled: !root.read-only;
+            current-index: 0;
+            model: [
+                "中英",
+                "中法",
+                "中日",
+                "中韩",
+            ];
+        }
+        input := LineEdit { 
+            placeholder-text: "在此输入单词或文本";
+            read-only: root.read_only;
+        }
+        Button { 
+            icon: @image_url("../icons/search_button.png");
+            clicked => { 
+                root.read_only = true;
+                root.search(input.text);
+                root.read_only = false;
+            }
+        }
+    }
+}
+
+export TranslateEdit := Rectangle {
+    TextEdit {  
+        
+    }
+}
