@@ -2,8 +2,10 @@ import { ComboBox , LineEdit, Button, TextEdit} from "std-widgets.slint";
 
 export TranslateInput := Rectangle {
     callback search(string);
-
     private property <bool> read_only;
+
+    border-color: black;
+    border-width: 1px;
     HorizontalLayout {
         height: 42px;
         ComboBox {
