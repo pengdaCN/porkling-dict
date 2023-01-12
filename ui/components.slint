@@ -10,7 +10,7 @@ export TranslateInput := Rectangle {
         height: 42px;
         ComboBox {
             width: 120px;
-            enabled: !root.read-only;
+            enabled: !root.read_only;
             current-index: 0;
             model: [
                 "中英",
@@ -25,6 +25,7 @@ export TranslateInput := Rectangle {
         }
         Button { 
             icon: @image_url("../icons/search_button.png");
+            enabled: !root.read_only;
             clicked => { 
                 root.read_only = true;
                 root.search(input.text);
@@ -37,5 +38,73 @@ export TranslateInput := Rectangle {
 export TranslateEdit := Rectangle {
     TextEdit {  
         
+    }
+}
+
+export struct SoundData := {
+    id: string,
+}
+
+Phonetic := Rectangle {
+    property <string> ty;
+    property <string> dbo;
+    property <[SoundData]> sounds;
+
+    callback sound(string);
+
+    height: 20px;
+    HorizontalLayout { 
+        Text { 
+            text: root.ty;
+        }
+
+        Text { 
+            text: "[" + root.dbo + "]";
+        }
+
+        for sound in root.sounds : Rectangle { 
+            Image {
+                height: 16px;
+                width: 16px;
+                padding-left: 7px;
+                source: @image-url("../icons/speaker-one.png");
+            }
+
+            TouchArea { 
+                clicked => { 
+                    root.sound(sound.id);
+                }
+            }
+        }
+    }
+}
+
+export struct PhoneticData := {
+    ty: string,
+    dbo: string,
+    sounds: [SoundData],
+}
+
+export WordView := Rectangle {
+    property <string> word;
+    property <[PhoneticData]> phonetics;
+    VerticalLayout { 
+        HorizontalLayout { 
+            Text { 
+                text: root.word;
+                color: green;
+                font-size: 30px;
+            }
+        }
+
+        HorizontalLayout { 
+            padding-top: 6px;
+
+            for phonetic in root.phonetics : Phonetic {
+                ty: phonetic.ty;
+                dbo: phonetic.dbo;
+                sounds: phonetic.sounds;
+            }
+        }
     }
 }

@@ -1,3 +1,11 @@
+mod generated_code {
+    slint::include_modules!();
+}
+
+use generated_code::*;
+
 fn main() {
-    println!("Hello, world!");
+    let app = App::new();
+
+    app.run();
 }
