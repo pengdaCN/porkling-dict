@@ -1,6 +1,6 @@
 import { ComboBox , LineEdit, Button, TextEdit} from "std-widgets.slint";
 
-export TranslateInput := Rectangle {
+export component TranslateInput inherits Rectangle {
     callback search(string);
     private property <bool> read_only;
 
@@ -35,20 +35,20 @@ export TranslateInput := Rectangle {
     }
 }
 
-export TranslateEdit := Rectangle {
+export component TranslateEdit inherits Rectangle {
     TextEdit {  
         
     }
 }
 
-export struct SoundData := {
+export struct SoundData {
     id: string,
 }
 
-Phonetic := Rectangle {
-    property <string> ty;
-    property <string> dbo;
-    property <[SoundData]> sounds;
+component Phonetic inherits Rectangle {
+    in-out property <string> ty;
+    in-out property <string> dbo;
+    in-out property <[SoundData]> sounds;
 
     callback sound(string);
 
@@ -79,13 +79,13 @@ Phonetic := Rectangle {
     }
 }
 
-export struct PhoneticData := {
+export struct PhoneticData {
     ty: string,
     dbo: string,
     sounds: [SoundData],
 }
 
-export WordView := Rectangle {
+export component WordView inherits Rectangle {
     property <string> word;
     property <[PhoneticData]> phonetics;
     VerticalLayout { 
