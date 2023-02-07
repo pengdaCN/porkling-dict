@@ -35,6 +35,41 @@ export component TranslateInput inherits Rectangle {
     }
 }
 
+export struct InputPromptData {
+    enter: string,
+    explain: string,
+}
+
+
+component PromptItem  {
+    in-out property <InputPromptData> data;
+
+    HorizontalLayout {
+        max-height: 30px;
+        Image {  
+            source: @image_url("../icons/search_button.png");
+        }
+    
+        Text { 
+            text: root.data.enter;
+        }
+    
+        Text {  
+            text: root.data.explain;
+        }
+    }
+}
+
+export component InputPromptList {
+    in-out property <[InputPromptData]> data;
+    VerticalLayout {
+        for promptData in root.data: PromptItem {
+            data: promptData;
+        }
+    }
+
+}
+
 export component TranslateEdit inherits Rectangle {
     TextEdit {  
         
